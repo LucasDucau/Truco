@@ -6,7 +6,7 @@ public class Cantar {
 	
 	
 	
-	public void envido (Manos mano)
+	public static void envido (Manos mano)
 	{
 		
 		int envidoCarta0=mano.arrayMano.get(0).getNumero();
@@ -76,7 +76,7 @@ public class Cantar {
 		}
 	}
 	
-	public void normalizarFiguras (int[] arrayEnvido)
+	public static void normalizarFiguras (int[] arrayEnvido)
 	{
 		
 		for (int i=0;i<arrayEnvido.length;i++)

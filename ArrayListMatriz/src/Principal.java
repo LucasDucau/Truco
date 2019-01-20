@@ -23,6 +23,9 @@ public class Principal {
 		//puntos
 		Puntos Puntaje = new Puntos(0,0);
 		
+		mazoDeCartas cartaTest0 = new mazoDeCartas(1," de Basto",13);
+		mazoDeCartas cartaTest1 = new mazoDeCartas(2," de Basto",1);
+		mazoDeCartas cartaTest2 = new mazoDeCartas(3," de Basto", 2);
 		
 		
 		
@@ -31,12 +34,18 @@ public class Principal {
 		Manos manoPar1 = new Manos(arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4));
 		Manos manoImpar1 = new Manos(arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5));
 		
+		Manos manoTest = new Manos(cartaTest0,cartaTest1,cartaTest2);
 		
-		System.out.println("Mano Par");
-		manoPar1.mostrarMano();
-		System.out.println("Mano Impar");
-		manoImpar1.mostrarMano();
+		Cantar.envido(manoTest);
 		
+		
+		
+		
+//		System.out.println("Mano Par");
+//		manoPar1.mostrarMano();
+//		System.out.println("Mano Impar");
+//		manoImpar1.mostrarMano();
+//		
 		
 
 	//	jugar(manoPar1,manoImpar1,Puntaje);
