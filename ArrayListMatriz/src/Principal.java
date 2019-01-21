@@ -23,9 +23,9 @@ public class Principal {
 		//puntos
 		Puntos Puntaje = new Puntos(0,0);
 		
-		mazoDeCartas cartaTest0 = new mazoDeCartas(1," de Basto",13);
-		mazoDeCartas cartaTest1 = new mazoDeCartas(2," de Basto",1);
-		mazoDeCartas cartaTest2 = new mazoDeCartas(3," de Basto", 2);
+		mazoDeCartas cartaTest0 = new mazoDeCartas(1," de Espada",13);
+		mazoDeCartas cartaTest1 = new mazoDeCartas(2," de Espada",1);
+		mazoDeCartas cartaTest2 = new mazoDeCartas(7," de Espada", 2);
 		
 		
 		

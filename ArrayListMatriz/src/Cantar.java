@@ -6,7 +6,7 @@ public class Cantar {
 	
 	
 	
-	public static void envido (Manos mano)
+	public static int envido (Manos mano)
 	{
 		
 		int envidoCarta0=mano.arrayMano.get(0).getNumero();
@@ -74,6 +74,43 @@ public class Cantar {
 			
 			
 		}
+		
+		//CARTA 0 = 1
+		else if(mano.arrayMano.get(0).getNombre().contentEquals(mano.arrayMano.get(1).getNombre()))
+		{
+			
+			envidoTotal=envidoBase+mano.arrayMano.get(0).getNumero()+mano.arrayMano.get(1).getNumero();
+			System.out.println("el envido total es: "+ envidoTotal);
+			
+		}
+		//CARTA 0 = 2
+		else if (mano.arrayMano.get(0).getNombre().contentEquals(mano.arrayMano.get(2).getNombre()))
+		{
+			envidoTotal=envidoBase+mano.arrayMano.get(0).getNumero()+mano.arrayMano.get(2).getNumero();
+			System.out.println("el envido total es: "+ envidoTotal);
+		}
+		//CARTA 1 = 2
+		else if(mano.arrayMano.get(1).getNombre().contentEquals(mano.arrayMano.get(2).getNombre()))
+		{
+			envidoTotal=envidoBase+mano.arrayMano.get(1).getNumero()+mano.arrayMano.get(2).getNumero();
+			System.out.println("el envido total es: "+ envidoTotal);
+		}
+		//no tenes nada pichon
+		else {
+			
+			for(int j=0;j<arrayEnvido.length;j++)
+			{
+				if(arrayEnvido[j]>envidoTotal)
+				{
+					envidoTotal=arrayEnvido[j];
+				}
+				
+			}
+			
+			System.out.println("el envido total es: "+ envidoTotal);
+		}
+		return envidoTotal;
+		
 	}
 	
 	public static void normalizarFiguras (int[] arrayEnvido)
