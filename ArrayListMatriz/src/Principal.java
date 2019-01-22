@@ -23,9 +23,14 @@ public class Principal {
 		//puntos
 		Puntos Puntaje = new Puntos(0,0);
 		
-		mazoDeCartas cartaTest0 = new mazoDeCartas(1," de Espada",13);
-		mazoDeCartas cartaTest1 = new mazoDeCartas(2," de Espada",1);
-		mazoDeCartas cartaTest2 = new mazoDeCartas(7," de Espada", 2);
+		mazoDeCartas cartaTest0 = new mazoDeCartas(2," de Basto",9);
+		mazoDeCartas cartaTest1 = new mazoDeCartas(2," de Espada",9);
+		mazoDeCartas cartaTest2 = new mazoDeCartas(12," de Espada", 7);
+		
+		mazoDeCartas cartaTest3= new mazoDeCartas(2," de Copa",9);
+		mazoDeCartas cartaTest4 = new mazoDeCartas(2," de Oro", 9);
+		mazoDeCartas cartaTest5 = new mazoDeCartas(12," de Basto", 7);
+		
 		
 		
 		
@@ -35,8 +40,10 @@ public class Principal {
 		Manos manoImpar1 = new Manos(arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5));
 		
 		Manos manoTest = new Manos(cartaTest0,cartaTest1,cartaTest2);
+		Manos manoTest1 = new Manos(cartaTest3,cartaTest4,cartaTest5);
 		
-		Cantar.envido(manoTest);
+		
+	//	Cantar.envido(manoTest);
 		
 		
 		
@@ -46,7 +53,7 @@ public class Principal {
 //		System.out.println("Mano Impar");
 //		manoImpar1.mostrarMano();
 //		
-		
+		jugar(manoTest,manoTest1,Puntaje);
 
 	//	jugar(manoPar1,manoImpar1,Puntaje);
 		
@@ -85,8 +92,9 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 	int rondasImpar=0;
 	boolean esParda=false;
 	boolean dobleParda=false;
-	boolean periodoEnvidoPar=true;
-	boolean periodoEnvidoImpar=true;
+	String respuestaCantar;
+	
+	
 	
 	
 	
@@ -105,6 +113,18 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 	//Pedir jugada par
 	while(true)
 	{
+		
+		if(rondasPar==0 && rondasImpar==0)
+		{
+			System.out.println("vas a cantar envido?");
+			System.out.println("posibles respuestas: envido, real envido, falta envido, no");
+			respuestaCantar=scan.nextLine();
+			resolverCantada(respuestaCantar);
+			
+			
+			
+		}
+		
 		
 		System.out.println("ingrese jugada par");
 		jugadaPar=scan.nextInt();
@@ -144,13 +164,11 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 			{
 				System.out.println("el jugador par gana la ronda: ");
 				rondasPar++;
-				rondasPar++;
 			}
 			else if	(manoPar1.arrayMano.get(jugadaPar).getValor() < manoImpar1.arrayMano.get(jugadaImpar).getValor())
 			{
 				System.out.println("el jugador impar gana la ronda: ");
 				rondasImpar++;	
-				rondasImpar++;
 			}
 			else
 			{
@@ -167,13 +185,11 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 			{
 				System.out.println("el jugador par gana la ronda: ");
 				rondasPar++;
-				rondasPar++;
 			}
 			else if	(manoPar1.arrayMano.get(jugadaPar).getValor() < manoImpar1.arrayMano.get(jugadaImpar).getValor())
 			{
 				System.out.println("el jugador impar gana la ronda: ");
 				rondasImpar++;	
-				rondasImpar++;
 			}
 			else {
 				System.out.println("doble empate");
@@ -204,6 +220,8 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 			
 			System.out.println("Parda");	
 			esParda=true;
+			rondasPar++;
+			rondasImpar++;
 		}
 		}
 
@@ -226,6 +244,15 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 	Puntaje.aplicarPuntos(puntosPar, puntosImpar);
 	
 
+	
+}
+public static void resolverCantada(String canto)
+{
+	
+	
+	
+	
+	
 	
 }
 
