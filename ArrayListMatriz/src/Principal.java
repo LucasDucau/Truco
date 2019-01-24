@@ -5,13 +5,14 @@ import java.util.Scanner;
 
 public class Principal {
 
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
  
 		ArrayList<mazoDeCartas> arrayMazo = new ArrayList<mazoDeCartas>();
 		
-		
+		int quienEsMano=0;
 		//creacion del mazo
 		
 		llenarArray(arrayMazo," de Basto");
@@ -21,7 +22,9 @@ public class Principal {
 		asignarValores(arrayMazo);
 		Collections.shuffle(arrayMazo);
 		//puntos
-		Puntos Puntaje = new Puntos(0,0);
+		
+
+		
 		
 		mazoDeCartas cartaTest0 = new mazoDeCartas(2," de Basto",9);
 		mazoDeCartas cartaTest1 = new mazoDeCartas(2," de Espada",9);
@@ -36,11 +39,11 @@ public class Principal {
 		
 
 		
-		Manos manoPar1 = new Manos(arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4));
-		Manos manoImpar1 = new Manos(arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5));
+		Manos manoPar1 = new Manos(arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4),0);
+		Manos manoImpar1 = new Manos(arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5),1);
 		
-		Manos manoTest = new Manos(cartaTest0,cartaTest1,cartaTest2);
-		Manos manoTest1 = new Manos(cartaTest3,cartaTest4,cartaTest5);
+		Manos manoTest = new Manos(cartaTest0,cartaTest1,cartaTest2,0);
+		Manos manoTest1 = new Manos(cartaTest3,cartaTest4,cartaTest5,1);
 		
 		
 	//	Cantar.envido(manoTest);
@@ -52,10 +55,18 @@ public class Principal {
 //		manoPar1.mostrarMano();
 //		System.out.println("Mano Impar");
 //		manoImpar1.mostrarMano();
-//		
-		jugar(manoTest,manoTest1,Puntaje);
+		
 
-	//	jugar(manoPar1,manoImpar1,Puntaje);
+//		
+		jugar(manoTest,manoTest1);
+		manoTest.esMano++;
+		manoTest1.esMano++;
+		
+		
+		
+
+
+	//	jugar(manoPar1,manoImpar1);
 		
 		
 		
@@ -83,8 +94,9 @@ public class Principal {
 
 	}
 
-public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
+public static void jugar(Manos manoPar1, Manos manoImpar1)
 {
+	
 	int puntosPar=0; 
 	int puntosImpar = 0;
 	int jugadaPar, jugadaImpar;
@@ -93,12 +105,12 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 	boolean esParda=false;
 	boolean dobleParda=false;
 	String respuestaCantar;
+	int[] quiero= new int []{0,1};
+	int resolucionEnvido;
 	
 	
 	
 	
-	
-	int rondas=0;
 	Scanner scan = new Scanner(System.in);
 	
 	
@@ -116,15 +128,14 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 		
 		if(rondasPar==0 && rondasImpar==0)
 		{
-			System.out.println("vas a cantar envido?");
-			System.out.println("posibles respuestas: envido, real envido, falta envido, no");
-			respuestaCantar=scan.nextLine();
-			resolverCantada(respuestaCantar);
+			System.out.println("queres cantar envido");
+			
+			Cantar.envido(manoPar1, manoImpar1, quiero);
+			
 			
 			
 			
 		}
-		
 		
 		System.out.println("ingrese jugada par");
 		jugadaPar=scan.nextInt();
@@ -173,7 +184,14 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 			else
 			{
 				System.out.println("triple parda, gana el jugador que fue mano");
-				//falta agregar que pasa
+				if(quienEsMano%2==0)
+				{
+					rondasPar++;
+				}
+				else
+				{
+					rondasImpar++;
+				}
 			}
 			
 		}
@@ -241,16 +259,32 @@ public static void jugar(Manos manoPar1, Manos manoImpar1, Puntos Puntaje)
 	
 	
 	
-	Puntaje.aplicarPuntos(puntosPar, puntosImpar);
+
+	
 	
 
 	
 }
-public static void resolverCantada(String canto)
+public static int peleaEnvidos(Manos manoTest, Manos manoTest1)
 {
+	int envidoPar=Cantar.resolverEnvido(manoTest);
+	int envidoImpar=Cantar.resolverEnvido(manoTest1);
+	int resultado;
 	
+	if (envidoPar>envidoImpar)
+	{
+		resultado=500;
+	}
+	else if(envidoImpar>envidoPar)
+	{
+		resultado=-500;
+	}
+	else
+	{
+		resultado=0;
+	}
 	
-	
+	return resultado;
 	
 	
 	

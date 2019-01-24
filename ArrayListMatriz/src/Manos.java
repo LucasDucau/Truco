@@ -8,17 +8,22 @@ public class Manos  {
 	private mazoDeCartas carta1;
 	private mazoDeCartas carta2;
 	public ArrayList<mazoDeCartas> arrayMano = new ArrayList<mazoDeCartas>();
+	private int puntos;
+	public int esMano;
 		
 	
 	
 	
 
-	public Manos (mazoDeCartas carta0,mazoDeCartas carta1,mazoDeCartas carta2)
+	public Manos (mazoDeCartas carta0,mazoDeCartas carta1,mazoDeCartas carta2,int esMano)
 	{
 		this.carta0=carta0;
 		this.carta1=carta1;
 		this.carta2=carta2;
+		this.esMano=esMano;
 		agregarAlArray(arrayMano);
+		this.puntos=0;
+		
 	}
 	
 	
@@ -44,6 +49,11 @@ public class Manos  {
 		 arrayMano.add(carta1);
 		 arrayMano.add(carta2);
 		 
+	}
+	public void aplicarPuntos(int numero)
+	{
+		puntos+=numero;
+		System.out.println("puntos: " + puntos);
 	}
 
 }
