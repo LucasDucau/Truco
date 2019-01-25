@@ -11,20 +11,33 @@ public class Cantar {
 	
 	public static void envido(Manos manoCanta, Manos manoResponde,int[] quiero)
 	{
+
 		Scanner scan = new Scanner(System.in);
 		String respuesta;
 		int envidoCanta;
 		int envidoResponde;
 		System.out.println("te cantaron envido, posibles respuestas: quiero, envido, real envido, falta envido, no quiero");
+		
+		
 		respuesta=scan.nextLine();
 		switch(respuesta)
+		
 		{
 		case "quiero":
 		{
+
 			envidoCanta=resolverEnvido(manoCanta);
 			envidoResponde=resolverEnvido(manoResponde);
 			aplicarPuntos(manoCanta,manoResponde,envidoCanta,envidoResponde,quiero[0]);
 		}
+		case "no quiero":
+			
+		{
+			
+			manoCanta.aplicarPuntos(quiero[1]);
+		}
+
+		
 		}
 		
 		
@@ -35,6 +48,7 @@ public class Cantar {
 		
 	}
 	
+
 	
 	
 	public static void aplicarPuntos (Manos manoCanta,Manos manoResponde,int envidoCanta, int envidoResponde,int puntos)

@@ -59,8 +59,7 @@ public class Principal {
 
 //		
 		jugar(manoTest,manoTest1);
-		manoTest.esMano++;
-		manoTest1.esMano++;
+
 		
 		
 		
@@ -184,7 +183,7 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 			else
 			{
 				System.out.println("triple parda, gana el jugador que fue mano");
-				if(quienEsMano%2==0)
+				if(manoPar1.esMano%2==0)
 				{
 					rondasPar++;
 				}
@@ -265,30 +264,7 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 
 	
 }
-public static int peleaEnvidos(Manos manoTest, Manos manoTest1)
-{
-	int envidoPar=Cantar.resolverEnvido(manoTest);
-	int envidoImpar=Cantar.resolverEnvido(manoTest1);
-	int resultado;
-	
-	if (envidoPar>envidoImpar)
-	{
-		resultado=500;
-	}
-	else if(envidoImpar>envidoPar)
-	{
-		resultado=-500;
-	}
-	else
-	{
-		resultado=0;
-	}
-	
-	return resultado;
-	
-	
-	
-}
+
 
 
 public static void llenarArray(ArrayList arrayMazo, String palo) 
