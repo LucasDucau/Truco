@@ -9,36 +9,85 @@ public class Cantar {
 	
 	
 	
-	public static void envido(Manos manoCanta, Manos manoResponde,int[] quiero)
+	public static void envido(Manos manoCanta, Manos manoResponde,String canto)
 	{
-
+		boolean invertir=false;
+		boolean envidoEnvidoFueCantado=false;
+		boolean realEnvidoFueCantado=false;
+		boolean faltaEnvidoFueCantado=false;
+		int[] quiero = new int[] {0,1};
 		Scanner scan = new Scanner(System.in);
-		String respuesta;
+		String respuesta="test";
 		int envidoCanta;
 		int envidoResponde;
-		System.out.println("te cantaron envido, posibles respuestas: quiero, envido, real envido, falta envido, no quiero");
 		
 		
-		respuesta=scan.nextLine();
-		switch(respuesta)
-		
+		if(canto.contentEquals("envido"))
 		{
-		case "quiero":
+			quiero[0]+=2;
+		}
+		
+		else if(canto.contentEquals("real envido"))
+		{
+			quiero[0]+=3;
+			envidoEnvidoFueCantado=true;
+			realEnvidoFueCantado=true;
+		}
+		else if(canto.contentEquals("falta envido"))
+		{
+			envidoEnvidoFueCantado=true;
+			realEnvidoFueCantado=true;
+			faltaEnvidoFueCantado=true;
+		}
+		
+		
+		
+		
+		System.out.println("te cantaron el tanto");
+		
+		while(!respuesta.contentEquals("quiero") && !respuesta.contentEquals("no quiero"))
 		{
 
-			envidoCanta=resolverEnvido(manoCanta);
-			envidoResponde=resolverEnvido(manoResponde);
-			aplicarPuntos(manoCanta,manoResponde,envidoCanta,envidoResponde,quiero[0]);
-		}
-		case "no quiero":
+			respuesta=scan.nextLine();
+			if(respuesta.contentEquals("envido") && envidoEnvidoFueCantado==false)
+			{
+				invertir=!invertir;
+				quiero[0]+=2;
+				envidoEnvidoFueCantado=true;	
+			}
+				
 			
+			
+			
+				
+		}
+		
+		
+
+		
+
+			if(respuesta.contentEquals("no quiero"))
 		{
+			if(invertir==true)
+			{
+				manoResponde.aplicarPuntos(quiero[1]);
+			}
+			else {
 			
 			manoCanta.aplicarPuntos(quiero[1]);
+			}
 		}
+			else
+		{
+			envidoCanta=resolverEnvido(manoCanta);
+			envidoResponde=resolverEnvido(manoResponde);
+			quienGana(manoCanta,manoResponde,envidoCanta,envidoResponde,quiero[0]);
+		}
+		
+
 
 		
-		}
+		
 		
 		
 		
@@ -51,7 +100,7 @@ public class Cantar {
 
 	
 	
-	public static void aplicarPuntos (Manos manoCanta,Manos manoResponde,int envidoCanta, int envidoResponde,int puntos)
+	public static void quienGana (Manos manoCanta,Manos manoResponde,int envidoCanta, int envidoResponde,int puntos)
 	{
 		
 		if(envidoCanta>envidoResponde)
@@ -85,13 +134,20 @@ public class Cantar {
 		int envidoCarta0=mano.arrayMano.get(0).getNumero();
 		int envidoCarta1=mano.arrayMano.get(1).getNumero();
 		int envidoCarta2=mano.arrayMano.get(2).getNumero();
+			
+
 		
 		int[] arrayEnvido = new int[] {envidoCarta0,envidoCarta1,envidoCarta2};
 		
-		normalizarFiguras(arrayEnvido);
+		arrayEnvido=normalizarFiguras(arrayEnvido);
+		
+		System.out.println(arrayEnvido[0]);
+		System.out.println(arrayEnvido[1]);
+		System.out.println(arrayEnvido[2]);
 		
 		
 		
+
 		
 		
 		
@@ -103,46 +159,11 @@ public class Cantar {
 		if(mano.arrayMano.get(0).getNombre().contentEquals(mano.arrayMano.get(1).getNombre()) && mano.arrayMano.get(1).getNombre().contentEquals(mano.arrayMano.get(2).getNombre()))
 			
 		{
-			System.out.println("flor");
-			if(envidoCarta0>envidoCarta1)
-			{
-				if(envidoCarta1>envidoCarta2)
-				{
-					envidoTotal=envidoBase+envidoCarta0+envidoCarta1;
-					System.out.println("El envido es: " +envidoTotal);
-				}
-				else
-				{
-					envidoTotal=envidoBase+envidoCarta0+envidoCarta2;
-					System.out.println("El envido es: " +envidoTotal);
-				}
-				
-			}
-			else if(envidoCarta1>envidoCarta0)
-			{
-				if(envidoCarta0>envidoCarta2)
-				{
-					envidoTotal=envidoBase+envidoCarta1+envidoCarta0;
-					System.out.println("El envido es: " +envidoTotal);
-				}
-				else
-				{
-					envidoTotal=envidoBase+envidoCarta1+envidoCarta2;
-					System.out.println("el envido es: " +envidoTotal);
-				}
-			}
-			else
-			{
-				if(envidoCarta0>envidoCarta1)
-				{
-					envidoTotal=envidoBase+envidoCarta2+envidoCarta0;
-					System.out.println("el envido es: " +envidoTotal);
-				}
-				else {
-					envidoTotal=envidoBase+envidoCarta2+envidoCarta1;
-					System.out.println("el envido es: " +envidoTotal);
-				}
-			}
+			System.out.println("tengo flor");//no vale nada
+			//calcula el mayor envido de una mano con flor
+			envidoTotal=envidoBase+Math.max(Math.max(arrayEnvido[0]+arrayEnvido[1],arrayEnvido[0]+arrayEnvido[2]),arrayEnvido[1]+arrayEnvido[2]);
+			
+			System.out.println("tu envido con flor es: " + envidoTotal);
 			
 			
 			
@@ -152,24 +173,26 @@ public class Cantar {
 		else if(mano.arrayMano.get(0).getNombre().contentEquals(mano.arrayMano.get(1).getNombre()))
 		{
 			
-			envidoTotal=envidoBase+mano.arrayMano.get(0).getNumero()+mano.arrayMano.get(1).getNumero();
+			envidoTotal=envidoBase+arrayEnvido[0]+arrayEnvido[1];
 			System.out.println("el envido total es: "+ envidoTotal);
 			
 		}
 		//CARTA 0 = 2
 		else if (mano.arrayMano.get(0).getNombre().contentEquals(mano.arrayMano.get(2).getNombre()))
 		{
-			envidoTotal=envidoBase+mano.arrayMano.get(0).getNumero()+mano.arrayMano.get(2).getNumero();
+			envidoTotal=envidoBase+arrayEnvido[0]+arrayEnvido[2];
 			System.out.println("el envido total es: "+ envidoTotal);
 		}
 		//CARTA 1 = 2
 		else if(mano.arrayMano.get(1).getNombre().contentEquals(mano.arrayMano.get(2).getNombre()))
 		{
-			envidoTotal=envidoBase+mano.arrayMano.get(1).getNumero()+mano.arrayMano.get(2).getNumero();
+			envidoTotal=envidoBase+arrayEnvido[1]+arrayEnvido[2];
 			System.out.println("el envido total es: "+ envidoTotal);
 		}
 		//no tenes nada pichon
 		else {
+			
+			System.out.println("no tenes nada pichon");
 			
 			for(int j=0;j<arrayEnvido.length;j++)
 			{
@@ -187,7 +210,7 @@ public class Cantar {
 	}
 	
 	
-	public static void normalizarFiguras (int[] arrayEnvido)
+	public static int[] normalizarFiguras (int[] arrayEnvido)
 	{
 		
 		for (int i=0;i<arrayEnvido.length;i++)
@@ -198,7 +221,7 @@ public class Cantar {
 			}
 		}
 		
-
+		return arrayEnvido;
 		
 		
 	}

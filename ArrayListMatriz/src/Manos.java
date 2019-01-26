@@ -4,6 +4,7 @@ public class Manos  {
 	
 	
 	//atributos
+	private String nombre;
 	private mazoDeCartas carta0;
 	private mazoDeCartas carta1;
 	private mazoDeCartas carta2;
@@ -15,7 +16,7 @@ public class Manos  {
 	
 	
 
-	public Manos (mazoDeCartas carta0,mazoDeCartas carta1,mazoDeCartas carta2,int esMano)
+	public Manos (String nombre,mazoDeCartas carta0,mazoDeCartas carta1,mazoDeCartas carta2,int esMano)
 	{
 		this.carta0=carta0;
 		this.carta1=carta1;
@@ -23,6 +24,7 @@ public class Manos  {
 		this.esMano=esMano;
 		agregarAlArray(arrayMano);
 		this.puntos=0;
+		this.nombre=nombre;
 		
 	}
 	
@@ -52,8 +54,9 @@ public class Manos  {
 	}
 	public void aplicarPuntos(int numero)
 	{
+		
 		puntos+=numero;
-		System.out.println("puntos: " + puntos);
+		System.out.println(nombre+" tiene : " + puntos+" puntos");
 	}
 
 }

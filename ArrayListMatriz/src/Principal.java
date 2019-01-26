@@ -26,9 +26,9 @@ public class Principal {
 
 		
 		
-		mazoDeCartas cartaTest0 = new mazoDeCartas(2," de Basto",9);
-		mazoDeCartas cartaTest1 = new mazoDeCartas(2," de Espada",9);
-		mazoDeCartas cartaTest2 = new mazoDeCartas(12," de Espada", 7);
+		mazoDeCartas cartaTest0 = new mazoDeCartas(11," de Espada",9);
+		mazoDeCartas cartaTest1 = new mazoDeCartas(10," de Espada",9);
+		mazoDeCartas cartaTest2 = new mazoDeCartas(6," de Espada", 7);
 		
 		mazoDeCartas cartaTest3= new mazoDeCartas(2," de Copa",9);
 		mazoDeCartas cartaTest4 = new mazoDeCartas(2," de Oro", 9);
@@ -39,11 +39,11 @@ public class Principal {
 		
 
 		
-		Manos manoPar1 = new Manos(arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4),0);
-		Manos manoImpar1 = new Manos(arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5),1);
+		Manos manoPar1 = new Manos("jorge",arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4),0);
+		Manos manoImpar1 = new Manos("marcos",arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5),1);
 		
-		Manos manoTest = new Manos(cartaTest0,cartaTest1,cartaTest2,0);
-		Manos manoTest1 = new Manos(cartaTest3,cartaTest4,cartaTest5,1);
+		Manos manoTest = new Manos("fernando",cartaTest0,cartaTest1,cartaTest2,0);
+		Manos manoTest1 = new Manos("negro",cartaTest3,cartaTest4,cartaTest5,1);
 		
 		
 	//	Cantar.envido(manoTest);
@@ -96,16 +96,13 @@ public class Principal {
 public static void jugar(Manos manoPar1, Manos manoImpar1)
 {
 	
-	int puntosPar=0; 
-	int puntosImpar = 0;
 	int jugadaPar, jugadaImpar;
 	int rondasPar=0;
 	int rondasImpar=0;
 	boolean esParda=false;
 	boolean dobleParda=false;
-	String respuestaCantar;
-	int[] quiero= new int []{0,1};
 	int resolucionEnvido;
+	String canto="asdasd";
 	
 	
 	
@@ -128,8 +125,9 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 		if(rondasPar==0 && rondasImpar==0)
 		{
 			System.out.println("queres cantar envido");
+			canto=scan.nextLine();
 			
-			Cantar.envido(manoPar1, manoImpar1, quiero);
+			Cantar.envido(manoPar1, manoImpar1,canto);
 			
 			
 			
