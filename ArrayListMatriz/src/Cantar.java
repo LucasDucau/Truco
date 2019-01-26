@@ -27,14 +27,15 @@ public class Cantar {
 			quiero[0]+=2;
 		}
 		
-		else if(canto.contentEquals("real envido"))
+		if(canto.contentEquals("real envido"))
 		{
 			quiero[0]+=3;
 			envidoEnvidoFueCantado=true;
 			realEnvidoFueCantado=true;
 		}
-		else if(canto.contentEquals("falta envido"))
+		if(canto.contentEquals("falta envido"))
 		{
+			quiero[0]=30-manoResponde.getPuntos();
 			envidoEnvidoFueCantado=true;
 			realEnvidoFueCantado=true;
 			faltaEnvidoFueCantado=true;
@@ -53,7 +54,32 @@ public class Cantar {
 			{
 				invertir=!invertir;
 				quiero[0]+=2;
+				quiero[1]+=1;
 				envidoEnvidoFueCantado=true;	
+			}
+			if(respuesta.contentEquals("real envido") && realEnvidoFueCantado==false)
+				
+			{
+				invertir=!invertir;
+				quiero[1]=quiero[0];
+				quiero[0]+=3;
+				realEnvidoFueCantado=true;
+			}
+			if(respuesta.contentEquals("falta envido") && faltaEnvidoFueCantado==false)
+			{
+				invertir=!invertir;
+				quiero[1]=quiero[0];
+				if(invertir==true)
+				{
+					quiero[0]=30-manoResponde.getPuntos();
+				}
+				else
+				{
+					quiero[0]=30-manoCanta.getPuntos();
+				}
+				faltaEnvidoFueCantado=true;
+
+				
 			}
 				
 			

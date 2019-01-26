@@ -39,14 +39,13 @@ public class Principal {
 		
 
 		
-		Manos manoPar1 = new Manos("jorge",arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4),0);
+		Manos manoPar1 = new Manos("el doctor",arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4),0);
 		Manos manoImpar1 = new Manos("marcos",arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5),1);
 		
 		Manos manoTest = new Manos("fernando",cartaTest0,cartaTest1,cartaTest2,0);
-		Manos manoTest1 = new Manos("negro",cartaTest3,cartaTest4,cartaTest5,1);
+		Manos manoTest1 = new Manos("jORgITO",cartaTest3,cartaTest4,cartaTest5,1);
 		
 		
-	//	Cantar.envido(manoTest);
 		
 		
 		
