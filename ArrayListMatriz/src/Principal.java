@@ -95,18 +95,23 @@ public class Principal {
 public static void jugar(Manos manoPar1, Manos manoImpar1)
 {
 	
-	int jugadaPar, jugadaImpar;
+	int jugadaPar;
+	int jugadaImpar;
 	int rondasPar=0;
 	int rondasImpar=0;
 	boolean esParda=false;
 	boolean dobleParda=false;
 	int resolucionEnvido;
 	String canto="asdasd";
+	boolean envidoDone=false;
+	String canto2;
 	
 	
 	
 	
 	Scanner scan = new Scanner(System.in);
+
+	
 	
 	
 	
@@ -124,17 +129,18 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 		if(rondasPar==0 && rondasImpar==0)
 		{
 			System.out.println("queres cantar envido");
+			
 			canto=scan.nextLine();
-			
+			if(canto.contentEquals("envido") || canto.contentEquals("real envido") || canto.contentEquals("falta envido"))
+			{
 			Cantar.envido(manoPar1, manoImpar1,canto);
-			
-			
-			
-			
+			envidoDone=true;
+			}
 		}
 		
 		System.out.println("ingrese jugada par");
 		jugadaPar=scan.nextInt();
+
 		if(manoPar1.arrayMano.get(jugadaPar).isFueJugada()==true)
 		{
 			System.out.println("esa carta ya fue jugada");
@@ -147,12 +153,28 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 		}
 	}
 	
+	if (rondasPar==0 && rondasImpar==0)
+	{
+		System.out.println("queres cantar envido");
+		scan.nextLine();
+		canto=scan.nextLine();
+		if(canto.contentEquals("envido") || canto.contentEquals("real envido") || canto.contentEquals("falta envido"))
+		{
+		Cantar.envido(manoImpar1,manoPar1,canto);
+		envidoDone=true;
+		}
 
+	}
 	//pedir jugada impar	
 	while(true)
 	{
+
 		System.out.println("ingrese jugada impar");
+
+		
 		jugadaImpar=scan.nextInt();
+		
+		
 		if(manoImpar1.arrayMano.get(jugadaImpar).isFueJugada()==true)
 		{
 			System.out.println("esa carta ya fue jugada");
