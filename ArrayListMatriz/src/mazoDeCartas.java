@@ -38,8 +38,8 @@ public class mazoDeCartas  {
 	public String Devolver()
 	{
 		String objetoAlTexto=
-				+ numero + " DE " + nombre+
-				" valor: " + valor;
+				+ numero + " DE " + nombre;
+		//	" valor: " + valor;
 				
 		
 		

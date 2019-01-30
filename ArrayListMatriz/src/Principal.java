@@ -39,11 +39,11 @@ public class Principal {
 		
 
 		
-		Manos manoPar1 = new Manos("el doctor",arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4),0);
-		Manos manoImpar1 = new Manos("marcos",arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5),1);
+		Manos manoPar1 = new Manos("player1",arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4),0);
+		Manos manoImpar1 = new Manos("player2",arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5),1);
 		
-		Manos manoTest = new Manos("fernando",cartaTest0,cartaTest1,cartaTest2,0);
-		Manos manoTest1 = new Manos("jORgITO",cartaTest3,cartaTest4,cartaTest5,1);
+		Manos manoTest = new Manos("player3",cartaTest0,cartaTest1,cartaTest2,0);
+		Manos manoTest1 = new Manos("player4",cartaTest3,cartaTest4,cartaTest5,1);
 		
 		
 		
@@ -57,7 +57,7 @@ public class Principal {
 		
 
 //		
-		jugar(manoTest,manoTest1);
+		jugar(manoPar1,manoImpar1);
 
 		
 		
@@ -101,10 +101,14 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 	int rondasImpar=0;
 	boolean esParda=false;
 	boolean dobleParda=false;
-	int resolucionEnvido;
 	String canto="asdasd";
 	boolean envidoDone=false;
-	String canto2;
+	boolean trucoNoQuerido=false;
+	int trucoPuntos=0;
+	boolean trucoCantado=false;
+	boolean reTrucoCantado=false;
+	boolean valeCuatroCantado=false;
+	boolean invertir=false;
 	
 	
 	
@@ -120,11 +124,9 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 	System.out.println("Mano Impar");
 	manoImpar1.mostrarMano();
 
-	while(rondasPar<2 && rondasImpar<2)
+	while(rondasPar<2 && rondasImpar<2 && trucoNoQuerido==false)
 	{
 	//Pedir jugada par
-	while(true)
-	{
 		
 		if(rondasPar==0 && rondasImpar==0)
 		{
@@ -137,10 +139,55 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 			envidoDone=true;
 			}
 		}
+	while(true)
+	{
 		
-		System.out.println("ingrese jugada par");
-		jugadaPar=scan.nextInt();
+		
 
+		System.out.println("canta o juga");
+		while(true) {
+			
+
+			canto=scan.nextLine();
+		
+			
+			
+		if(canto.contentEquals("truco") && trucoCantado==false)
+		{
+			trucoPuntos+=2;
+			System.out.println("te cantaron truco, responde");
+			canto=scan.nextLine();
+			if(canto.contentEquals("quiero"))
+			{
+				System.out.println("juga tu carta");
+				trucoCantado=true;
+			}
+			if(canto.contentEquals("no quiero"))
+			{
+				System.out.println("no querido");
+				manoPar1.aplicarPuntos(trucoPuntos-1);
+				trucoNoQuerido=true;
+			}
+			
+			
+		}
+		if(canto.contentEquals("quiero retruco") && trucoCantado==true && reTrucoCantado==false)
+		{
+			trucoPuntos+=1;
+			
+		}
+		if(canto.contentEquals("0") || canto.contentEquals("1") || canto.contentEquals("2"))
+		{
+
+		jugadaPar=Integer.parseInt(canto);
+		break;
+		}
+		else
+		{
+			System.out.println("jugada invalida");
+		}
+		}
+		
 		if(manoPar1.arrayMano.get(jugadaPar).isFueJugada()==true)
 		{
 			System.out.println("esa carta ya fue jugada");
@@ -153,10 +200,10 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 		}
 	}
 	
-	if (rondasPar==0 && rondasImpar==0)
+	if (rondasPar==0 && rondasImpar==0 && envidoDone==false)
 	{
 		System.out.println("queres cantar envido");
-		scan.nextLine();
+
 		canto=scan.nextLine();
 		if(canto.contentEquals("envido") || canto.contentEquals("real envido") || canto.contentEquals("falta envido"))
 		{
@@ -169,11 +216,25 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 	while(true)
 	{
 
-		System.out.println("ingrese jugada impar");
+		System.out.println("canta o juga");
 
-		
-		jugadaImpar=scan.nextInt();
-		
+		while(true)
+		{
+			
+			canto=scan.nextLine();
+			if(canto.contentEquals("0") || canto.contentEquals("1") || canto.contentEquals("2"))
+			{
+
+			jugadaImpar=Integer.parseInt(canto);
+			break;
+			}
+			else
+			{
+				System.out.println("jugada invalida");
+			}
+			
+		}
+
 		
 		if(manoImpar1.arrayMano.get(jugadaImpar).isFueJugada()==true)
 		{
