@@ -104,11 +104,11 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 	String canto="asdasd";
 	boolean envidoDone=false;
 	boolean trucoNoQuerido=false;
-	int trucoPuntos=0;
+	int trucoPuntos=1;
 	boolean trucoCantado=false;
 	boolean reTrucoCantado=false;
 	boolean valeCuatroCantado=false;
-	boolean invertir=false;
+	boolean parTieneElQuiero=false;
 	
 	
 	
@@ -126,7 +126,7 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 
 	while(rondasPar<2 && rondasImpar<2 && trucoNoQuerido==false)
 	{
-	//Pedir jugada par
+	//ENVIDO PAR
 		
 		if(rondasPar==0 && rondasImpar==0)
 		{
@@ -143,39 +143,92 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 	{
 		
 		
-
+			//JUGADA PAR
 		System.out.println("canta o juga");
-		while(true) {
+		while(true)
+		{
 			
 
 			canto=scan.nextLine();
 		
 			
-			
+			//TRUCO
 		if(canto.contentEquals("truco") && trucoCantado==false)
 		{
-			trucoPuntos+=2;
-			System.out.println("te cantaron truco, responde");
-			canto=scan.nextLine();
+			trucoPuntos++;
+			canto=Responder();
 			if(canto.contentEquals("quiero"))
 			{
 				System.out.println("juga tu carta");
+				envidoDone=true;
 				trucoCantado=true;
+
 			}
 			if(canto.contentEquals("no quiero"))
 			{
 				System.out.println("no querido");
-				manoPar1.aplicarPuntos(trucoPuntos-1);
-				trucoNoQuerido=true;
+
+				aplicarPuntosNoQuerido(trucoPuntos,parTieneElQuiero,manoPar1,manoImpar1);
+				return;
+				
 			}
 			
+
+			canto=scan.nextLine();
 			
 		}
+		//RETRUCO
 		if(canto.contentEquals("quiero retruco") && trucoCantado==true && reTrucoCantado==false)
 		{
-			trucoPuntos+=1;
+			System.out.println("te cantaron retruco");
+			parTieneElQuiero=!parTieneElQuiero;
+			trucoPuntos++;
+			canto=Responder();
+			if(canto.contentEquals("quiero"))
+			{
+				System.out.println("juga entonces");
+				reTrucoCantado=true;
+
+			}
+			if(canto.contentEquals("no quiero"))
+			{
+				System.out.println("no querido");				
+
+				aplicarPuntosNoQuerido(trucoPuntos,parTieneElQuiero,manoPar1,manoImpar1);
+				return;
+				
+			}
+			
+			canto=scan.nextLine();
+			
+			
+		}	
+		//VALE CUATRO
+		if(canto.contentEquals("quiero vale cuatro") && trucoCantado==true && reTrucoCantado==true && valeCuatroCantado==false)
+		{
+			System.out.println("te cantaron vale cuatro");
+			parTieneElQuiero=!parTieneElQuiero;
+			trucoPuntos++;
+			canto=Responder();
+			if(canto.contentEquals("quiero"))
+			{
+				System.out.println("juga");
+				valeCuatroCantado=true;
+
+				
+			}
+			if(canto.contentEquals("no quiero"))
+			{
+				System.out.println("no querido");
+				aplicarPuntosNoQuerido(trucoPuntos,parTieneElQuiero,manoPar1,manoImpar1);
+				return;
+			}
+			
+			canto=scan.nextLine();
 			
 		}
+
+		
 		if(canto.contentEquals("0") || canto.contentEquals("1") || canto.contentEquals("2"))
 		{
 
@@ -222,6 +275,79 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 		{
 			
 			canto=scan.nextLine();
+			
+			//TRUCO
+			if(canto.contentEquals("truco") & trucoCantado==false)
+			{
+				parTieneElQuiero=true;
+				trucoPuntos++;
+				canto=Responder();
+				if(canto.contentEquals("quiero"))
+				{
+					System.out.println("juga tu carta");
+					envidoDone=true;
+					trucoCantado=true;
+				}
+				if(canto.contentEquals("no quiero"))
+				{
+					System.out.println("no querido");
+					aplicarPuntosNoQuerido(trucoPuntos,parTieneElQuiero,manoPar1,manoImpar1);
+					return;
+				}
+				canto=scan.nextLine();
+				
+			}
+			
+			//RETRUCO
+			if(canto.contentEquals("quiero retruco") && trucoCantado==true && reTrucoCantado==false)
+			{
+				parTieneElQuiero=!parTieneElQuiero;
+				trucoPuntos++;
+				canto=Responder();
+				if(canto.contentEquals("quiero"))
+				{
+					System.out.println("juga tu carta");
+					reTrucoCantado=true;
+				}
+				if(canto.contentEquals("no quiero"))
+				{
+					System.out.println("no querido");
+					aplicarPuntosNoQuerido(trucoPuntos,parTieneElQuiero,manoPar1,manoImpar1);
+					return;
+				}
+				
+				canto=scan.nextLine();
+			}
+			
+			// VALE CUATRO
+			if(canto.contentEquals("quiero vale cuatro") && trucoCantado==true && reTrucoCantado==true && valeCuatroCantado==false)
+			{
+				parTieneElQuiero=!parTieneElQuiero;
+				trucoPuntos++;
+				canto=Responder();
+				if(canto.contentEquals("quiero"))
+				{
+					System.out.println("juga entonces");
+					valeCuatroCantado=true;
+				}
+				if(canto.contentEquals("no quiero"))
+				{
+					System.out.println("no QUERido");
+					aplicarPuntosNoQuerido(trucoPuntos,parTieneElQuiero,manoPar1,manoImpar1);
+					return;
+				}
+				
+				canto=scan.nextLine();
+			
+			}
+			
+			
+			
+			
+			
+			
+			
+			
 			if(canto.contentEquals("0") || canto.contentEquals("1") || canto.contentEquals("2"))
 			{
 
@@ -330,7 +456,7 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 
 	
 	}
-	
+	System.out.println("termine");
 	
 	
 	
@@ -345,6 +471,32 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 	
 }
 
+
+public static void aplicarPuntosNoQuerido(int trucoPuntos,boolean parTieneElQuiero, Manos manoPar1, Manos manoImpar1)
+{
+	if(parTieneElQuiero==true)
+	{
+		manoImpar1.aplicarPuntos(trucoPuntos-1);
+	}
+	else
+	{
+		manoPar1.aplicarPuntos(trucoPuntos-1);
+	}
+}
+
+
+public static String Responder()
+{
+	String canto="AAAA_AAAAA";
+	Scanner scan = new Scanner(System.in);
+	while(!canto.contentEquals("quiero") && !canto.contentEquals("no quiero"))
+	{
+		System.out.println("Responde quiero o no quiero");
+		canto=scan.nextLine();
+		
+	}
+	return canto;
+}
 
 
 public static void llenarArray(ArrayList arrayMazo, String palo) 
