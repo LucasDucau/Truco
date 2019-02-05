@@ -191,7 +191,7 @@ public class Cantar {
 			//calcula el mayor envido de una mano con flor
 			envidoTotal=envidoBase+Math.max(Math.max(arrayEnvido[0]+arrayEnvido[1],arrayEnvido[0]+arrayEnvido[2]),arrayEnvido[1]+arrayEnvido[2]);
 			
-			System.out.println("tu envido con flor es: " + envidoTotal);
+			System.out.println( mano.getNombre() +" tu envido con flor es: " + envidoTotal);
 			
 			
 			
@@ -202,20 +202,20 @@ public class Cantar {
 		{
 			
 			envidoTotal=envidoBase+arrayEnvido[0]+arrayEnvido[1];
-			System.out.println("el envido total es: "+ envidoTotal);
+			System.out.println( mano.getNombre() +" el envido total es: "+ envidoTotal);
 			
 		}
 		//CARTA 0 = 2
 		else if (mano.arrayMano.get(0).getNombre().contentEquals(mano.arrayMano.get(2).getNombre()))
 		{
 			envidoTotal=envidoBase+arrayEnvido[0]+arrayEnvido[2];
-			System.out.println("el envido total es: "+ envidoTotal);
+			System.out.println( mano.getNombre() +" el envido total es: "+ envidoTotal);
 		}
 		//CARTA 1 = 2
 		else if(mano.arrayMano.get(1).getNombre().contentEquals(mano.arrayMano.get(2).getNombre()))
 		{
 			envidoTotal=envidoBase+arrayEnvido[1]+arrayEnvido[2];
-			System.out.println("el envido total es: "+ envidoTotal);
+			System.out.println( mano.getNombre() +" el envido total es: "+ envidoTotal);
 		}
 		//no tenes nada pichon
 		else {
@@ -231,7 +231,7 @@ public class Cantar {
 				
 			}
 			
-			System.out.println("el envido total es: "+ envidoTotal);
+			System.out.println( mano.getNombre() + " el envido total es: "+ envidoTotal);
 		}
 		return envidoTotal;
 		

@@ -20,35 +20,34 @@ public class Principal {
 		llenarArray(arrayMazo," de Espada");
 		llenarArray(arrayMazo," de Copa");
 		asignarValores(arrayMazo);
-		Collections.shuffle(arrayMazo);
+	//	Collections.shuffle(arrayMazo);
 		//puntos
 		
 
 		
 		
-		mazoDeCartas cartaTest0 = new mazoDeCartas(11," de Espada",9);
-		mazoDeCartas cartaTest1 = new mazoDeCartas(10," de Espada",9);
-		mazoDeCartas cartaTest2 = new mazoDeCartas(6," de Espada", 7);
-		
-		mazoDeCartas cartaTest3= new mazoDeCartas(2," de Copa",9);
-		mazoDeCartas cartaTest4 = new mazoDeCartas(2," de Oro", 9);
-		mazoDeCartas cartaTest5 = new mazoDeCartas(12," de Basto", 7);
-		
-		
-		
-		
+//		mazoDeCartas cartaTest0 = new mazoDeCartas(11," de Espada",9);
+//		mazoDeCartas cartaTest1 = new mazoDeCartas(10," de Espada",9);
+//		mazoDeCartas cartaTest2 = new mazoDeCartas(6," de Espada", 7);
+//		
+//		mazoDeCartas cartaTest3= new mazoDeCartas(2," de Copa",9);
+//		mazoDeCartas cartaTest4 = new mazoDeCartas(2," de Oro", 9);
+//		mazoDeCartas cartaTest5 = new mazoDeCartas(12," de Basto", 7);
+//		
+//		
+//		
+//		mazoDeCartas cartaTest6 = new mazoDeCartas(12,"de XD", 7);
 
 		
 		Manos manoPar1 = new Manos("player1",arrayMazo.get(0),arrayMazo.get(2),arrayMazo.get(4),0);
 		Manos manoImpar1 = new Manos("player2",arrayMazo.get(1), arrayMazo.get(3), arrayMazo.get(5),1);
 		
-		Manos manoTest = new Manos("player3",cartaTest0,cartaTest1,cartaTest2,0);
-		Manos manoTest1 = new Manos("player4",cartaTest3,cartaTest4,cartaTest5,1);
+//		Manos manoTest = new Manos("player3",cartaTest0,cartaTest1,cartaTest2,0);
+//		Manos manoTest1 = new Manos("player4",cartaTest3,cartaTest4,cartaTest5,1);
+//		
 		
 		
-		
-		
-		
+
 		
 //		System.out.println("Mano Par");
 //		manoPar1.mostrarMano();
@@ -57,9 +56,46 @@ public class Principal {
 		
 
 //		
-		jugar(manoPar1,manoImpar1);
-
+	//	jugar(manoPar1,manoImpar1);
 		
+		
+		while(manoPar1.getPuntos()<30 && manoImpar1.getPuntos()<30)
+		{
+			
+		Collections.shuffle(arrayMazo);
+		
+		manoPar1.setCarta0(arrayMazo.get(0));
+		manoPar1.setCarta1(arrayMazo.get(2));
+		manoPar1.setCarta2(arrayMazo.get(4));
+		
+		manoPar1.agregarAlArray();
+		
+		manoImpar1.setCarta0(arrayMazo.get(1));
+		manoImpar1.setCarta1(arrayMazo.get(3));
+		manoImpar1.setCarta2(arrayMazo.get(5));
+		
+		manoImpar1.agregarAlArray();
+		int decidir=0;
+		if(decidir%2==0)
+		{
+			jugar(manoPar1,manoImpar1);
+			
+		}
+		else
+		{
+			jugar(manoImpar1,manoPar1);
+		}
+		decidir++;
+		manoPar1.setEsMano(manoPar1.getEsMano()+1);
+		manoImpar1.setEsMano(manoImpar1.getEsMano()+1);
+		
+		for(int i=0;i<3;i++)
+		{
+			manoPar1.arrayMano.get(i).setFueJugada(false);
+			manoImpar1.arrayMano.get(i).setFueJugada(false);
+		}
+		
+		}
 		
 		
 
@@ -80,14 +116,14 @@ public class Principal {
 		
 		
 		
-		
+		//VER MAZO
 //	for(int i=0;i<arrayMazo.size();i++)
 //		{
 //			System.out.println(arrayMazo.get(i).Devolver());
 //		}
 //	
 //		
-		
+		System.exit(0);
 
 
 	}
@@ -119,9 +155,9 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 	
 	
 	
-	System.out.println("Mano Par");
+	System.out.println(manoPar1.getNombre());
 	manoPar1.mostrarMano();
-	System.out.println("Mano Impar");
+	System.out.println(manoImpar1.getNombre());
 	manoImpar1.mostrarMano();
 
 	while(rondasPar<2 && rondasImpar<2 && trucoNoQuerido==false)
@@ -369,7 +405,7 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 		else
 		{ 
 			manoImpar1.arrayMano.get(jugadaImpar).setFueJugada(true);
-			System.out.println("el jugador impar juega la carta: " +manoImpar1.arrayMano.get(jugadaImpar).getNumero() + manoImpar1.arrayMano.get(jugadaImpar).getNombre());
+			System.out.println(manoImpar1.getNombre()+" juega la carta: " +manoImpar1.arrayMano.get(jugadaImpar).getNumero() + manoImpar1.arrayMano.get(jugadaImpar).getNombre());
 			break;
 		}
 	}
@@ -378,12 +414,12 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 		if (dobleParda==true){
 			if(manoPar1.arrayMano.get(jugadaPar).getValor() > manoImpar1.arrayMano.get(jugadaImpar).getValor())
 			{
-				System.out.println("el jugador par gana la ronda: ");
+				System.out.println(manoPar1.getNombre()+" gana la ronda: ");
 				rondasPar++;
 			}
 			else if	(manoPar1.arrayMano.get(jugadaPar).getValor() < manoImpar1.arrayMano.get(jugadaImpar).getValor())
 			{
-				System.out.println("el jugador impar gana la ronda: ");
+				System.out.println(manoImpar1.getNombre()+ " gana la ronda: ");
 				rondasImpar++;	
 			}
 			else
@@ -406,12 +442,12 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 		else if(esParda==true) {
 			if(manoPar1.arrayMano.get(jugadaPar).getValor() > manoImpar1.arrayMano.get(jugadaImpar).getValor())
 			{
-				System.out.println("el jugador par gana la ronda: ");
+				System.out.println(manoPar1.getNombre()+" gana la ronda: ");
 				rondasPar++;
 			}
 			else if	(manoPar1.arrayMano.get(jugadaPar).getValor() < manoImpar1.arrayMano.get(jugadaImpar).getValor())
 			{
-				System.out.println("el jugador impar gana la ronda: ");
+				System.out.println(manoImpar1.getNombre()+ " gana la ronda: ");
 				rondasImpar++;	
 			}
 			else {
@@ -431,12 +467,12 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 		//quien gana
 		if(manoPar1.arrayMano.get(jugadaPar).getValor() > manoImpar1.arrayMano.get(jugadaImpar).getValor())
 		{
-			System.out.println("el jugador par gana la ronda: ");
+			System.out.println(manoPar1.getNombre()+ " gana la ronda: ");
 			rondasPar++;
 		}
 		else if	(manoPar1.arrayMano.get(jugadaPar).getValor() < manoImpar1.arrayMano.get(jugadaImpar).getValor())
 		{
-			System.out.println("el jugador impar gana la ronda: ");
+			System.out.println(manoImpar1.getNombre()+" gana la ronda: ");
 			rondasImpar++;			
 		}
 		else {
@@ -458,7 +494,16 @@ public static void jugar(Manos manoPar1, Manos manoImpar1)
 	}
 	System.out.println("termine");
 	
+	if(rondasPar>rondasImpar)
+	{
+		manoPar1.aplicarPuntos(trucoPuntos);
+	}
+	else {
+		manoImpar1.aplicarPuntos(trucoPuntos);
+	}
 	
+	System.out.println(manoPar1.getNombre()+ " puntaje: " +manoPar1.getPuntos());
+	System.out.println(manoImpar1.getNombre()+ " puntaje: "+ manoImpar1.getPuntos());
 	
 	
 	
